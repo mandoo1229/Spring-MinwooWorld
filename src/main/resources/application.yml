@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/studyweb?characterEncoding=UTF-8
+      username: root
+      password: fngml2tp^^
+#      connection-test-query: SELECT NOW() FROM dual
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
