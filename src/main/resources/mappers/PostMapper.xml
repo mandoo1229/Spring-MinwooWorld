@@ -30,13 +30,12 @@
         )
     </insert>
 
-    <select id="findById" parameterType="long" resultType="com.minwoo.domain.post.PostRequest">
+    <select id="findById" parameterType="long" resultType="com.minwoo.domain.post.PostResponse">
         SELECT
-            <include refid="postColumns" />
-            FROM
-                tb_post
-            WHERE
-                id = #{value}
+            <include refid="postColumns"/>
+            FROM tb_post
+        WHERE
+            id = #{value}
     </select>
 
     <update id="update" parameterType="com.minwoo.domain.post.PostRequest">
