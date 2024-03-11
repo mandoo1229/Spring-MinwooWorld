@@ -1,5 +1,8 @@
 package com.minwoo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.minwoo.domain.post.PostMapper;
 import com.minwoo.domain.post.PostRequest;
 import com.minwoo.domain.post.PostResponse;
@@ -27,6 +30,18 @@ class MinwooworldApplicationTests {
 
 		List<PostResponse> posts = postMapper.findAll();
 		System.out.println("전체 게시글 수 : " + posts.size() + "개입니다.");
+	}
+
+	@Test
+	void findById() {
+		PostResponse post = postMapper.findById(1L);
+		try {
+			String postJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
+			System.out.println(postJson);
+
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
