@@ -14,7 +14,7 @@
         , modified_date
     </sql>
 
-    <insert id="save" parameterType="com.minwoo.domain.post.PostRequest">
+    <insert id="save" parameterType="com.minwoo.domain.post.PostRequest" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tb_post (
                              <include refid="postColumns" />
         ) VALUES (
