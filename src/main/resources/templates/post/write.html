@@ -1,5 +1,31 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/header :: main-head"> </head>
-    <body th:replace="fragments/body :: main-body"> </body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+    <th:block layout:fragment="title">
+        <title>글작성 페이지</title>
+    </th:block>
+    <th:block layout:fragment="content">
+        <div class="page_tits">
+            <h3>게시판 관리</h3>
+            <p class="path"><strong>현재 위치 :</strong> <span>게시판 관리</span> <span>리스트형</span> <span>글작성</span></p>
+        </div>
+        <div class="content">
+            <section>
+                <form id="saveForm" method="post" autocomplete="off">
+                    <input type="hidden" id="id" name="id" th:if="${post != null}" th:value="${post.id}"/>
+                    <input type="hidden" id="noticeYn" name="noticeYn"/>
+                    <table class="tb tb_row">
+                        <colgroup>
+                            <col style="width: 15%" /> <col style="width: 35%;"/> <col style="width: 15%" /> <col style="width: 35%;">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th scope="row">공지글</th>
+<!--                                <tb><span</tb>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </section>
+        </div>
+    </th:block>
 </html>
