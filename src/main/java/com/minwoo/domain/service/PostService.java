@@ -1,13 +1,16 @@
 package com.minwoo.domain.service;
 
+import com.minwoo.common.dto.MessageDto;
 import com.minwoo.domain.post.PostMapper;
 import com.minwoo.domain.post.PostRequest;
 import com.minwoo.domain.post.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -62,6 +65,7 @@ public class PostService {
     public List<PostResponse> findAllPost() {
         return postMapper.findAll();
     }
+
 
 
 }
