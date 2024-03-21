@@ -59,14 +59,24 @@
             id = #{id}
     </delete>
 
-    <select id="findAll" resultType="com.minwoo.domain.post.PostResponse">
+    <select id="findAll" parameterType="com.minwoo.common.dto.SearchDto" resultType="com.minwoo.domain.post.PostResponse">
         SELECT
-            <include refid="postColumns" />
-            FROM
-                tb_post
+            <include refid="postColumns"/>
+        FROM
+            tb_post
         WHERE
             delete_yn = 0
         ORDER BY
             id DESC
+        LIMIT #{pagination.limitStart}, #{recordSize}
+    </select>
+    
+    <select id="count" parameterType="com.minwoo.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            tb_post
+        WHERE
+            delete_yn = 0
     </select>
 </mapper>
