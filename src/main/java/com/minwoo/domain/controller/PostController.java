@@ -1,16 +1,15 @@
 package com.minwoo.domain.controller;
 
 import com.minwoo.common.dto.MessageDto;
+import com.minwoo.common.dto.SearchDto;
+import com.minwoo.common.pagin.PagingResponse;
 import com.minwoo.domain.post.PostRequest;
 import com.minwoo.domain.post.PostResponse;
 import com.minwoo.domain.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,9 +35,9 @@ public class PostController {
     }
 
     @GetMapping("/post/list.do")
-    public String openPostList(Model model) {
-        List<PostResponse> posts = postService.findAllPost();
-        model.addAttribute("posts",posts);
+    public String openPostList(@ModelAttribute("params") final SearchDto params, Model model) {
+        PagingResponse<PostResponse> response = postService.findAllPost(params);
+        model.addAttribute("response",response);
         return "post/list";
     }
 

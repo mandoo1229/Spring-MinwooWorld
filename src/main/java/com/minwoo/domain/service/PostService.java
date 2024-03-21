@@ -1,6 +1,9 @@
 package com.minwoo.domain.service;
 
 import com.minwoo.common.dto.MessageDto;
+import com.minwoo.common.dto.SearchDto;
+import com.minwoo.common.pagin.Pagination;
+import com.minwoo.common.pagin.PagingResponse;
 import com.minwoo.domain.post.PostMapper;
 import com.minwoo.domain.post.PostRequest;
 import com.minwoo.domain.post.PostResponse;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -62,10 +66,21 @@ public class PostService {
      * 게시글 리스트 조회
      * @return - 게시글 리스트
      */
-    public List<PostResponse> findAllPost() {
-        return postMapper.findAll();
-    }
 
+
+    public PagingResponse<PostResponse> findAllPost(final SearchDto params) {
+       int count = postMapper.count(params);
+       if (count < 1) {
+           return new PagingResponse<>(Collections.emptyList(), null);
+
+       }
+
+        Pagination pagination = new Pagination(count, params);
+        params.setPagination(pagination);
+
+        List<PostResponse> list = postMapper.findAll(params);
+        return new PagingResponse<>(list, pagination);
+    }
 
 
 }
